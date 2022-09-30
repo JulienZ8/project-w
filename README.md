@@ -1,1 +1,1 @@
-# thought_project
+# wapiti
