@@ -38,8 +38,15 @@ def cipher_form(request):
 
             for i in text:
 
-                new_letter = string.ascii_lowercase[(string.ascii_lowercase.index(i) + key) % 26]
-                new_text = new_text + new_letter
+                if not ((i.isalpha()) and i.isascii()):
+                    new_text = new_text + i
+                else:
+                    if (i.islower()):
+                        new_letter = string.ascii_lowercase[(string.ascii_lowercase.index(i) + key) % 26]
+                        new_text = new_text + new_letter
+                    else:
+                        new_letter = string.ascii_uppercase[(string.ascii_uppercase.index(i) + key) % 26]
+                        new_text = new_text + new_letter
 
     form = CaesarCipherForm()
     return render(request, 'caesar.html', {'new_text': new_text, 'form': form})
