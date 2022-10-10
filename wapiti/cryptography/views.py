@@ -36,15 +36,10 @@ def cipher_form(request):
             key = form.cleaned_data['key_field']
             text = form.cleaned_data['text_field']
 
-            key_mod = key % 26
-            print(key, text, key_mod)
-            for i in range(len(text)):
+            for i in text:
 
-                letter = text[i]
-                new_letter = string.ascii_lowercase[(string.ascii_lowercase.index(letter)+key_mod)%26]
+                new_letter = string.ascii_lowercase[(string.ascii_lowercase.index(i) + key) % 26]
                 new_text = new_text + new_letter
-                print(new_letter)
-                print(new_text)
 
     form = CaesarCipherForm()
     return render(request, 'caesar.html', {'new_text': new_text, 'form': form})
