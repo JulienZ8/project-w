@@ -1,0 +1,19 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<h1>Caesar Cipher</h1>
+<body style="padding: 20px;">
+    {% crispy form form.helper %}
+
+
+    <div>
+        Ciphered text : {{new_text}}
+    </div>
+</body>
+</html>
