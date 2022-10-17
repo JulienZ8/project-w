@@ -1,6 +1,6 @@
 from django.test import TestCase
 import unittest
-from. import views
+from . import views
 
 # Create your tests here.
 class TestCaesarCipher(unittest.TestCase):
