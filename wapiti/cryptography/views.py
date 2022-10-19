@@ -6,7 +6,8 @@ import string
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the cryptography index.")
+    #return HttpResponse("Hello, world. You're at the cryptography index.")
+    return render(request, 'index.html')
 
 
 def cipher_form(request):
