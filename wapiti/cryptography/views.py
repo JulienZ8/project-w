@@ -43,7 +43,3 @@ def caesar_cipher(key: int, text: str):
                 new_text = new_text + new_letter
     #except:
     return new_text
-
-
-
-
