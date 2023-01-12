@@ -1,19 +1,23 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-
 <!DOCTYPE html>
+
+{% block body_block %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Caesar cipher algorithm</title>
+
+
 </head>
-{% block body_block %}
 <h1>Caesar Cipher</h1>
 <body style="padding: 20px;">
     {% crispy form form.helper %}
+
+
     <div>
         Ciphered text : {{new_text}}
     </div>
 </body>
-{% endblock %}
 </html>
+{% endblock %}

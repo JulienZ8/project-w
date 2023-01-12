@@ -1,0 +1,16 @@
+Error message: 
+ division by zero 
+ date and time: 2023-01-10 19:04:55.486763 
+Error message: 
+ unsupported operand type(s) for /: 'int' and 'str' 
+ date and time: 2023-01-10 19:07:39.523932 
+
+ date and time: 2023-01-10 19:09:50.700617 
+ Error message: 
+ unsupported operand type(s) for /: 'int' and 'str' 
+ nominator: 12, denominator: a 
+
+ date and time: 2023-01-10 19:12:31.271837 
+ Error message: 
+ division by zero 
+ nominator: 12, denominator: 0 

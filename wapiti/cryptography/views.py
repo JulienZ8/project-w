@@ -6,7 +6,7 @@ import string
 
 
 def index(request):
-    #return HttpResponse("Hello, world. You're at the cryptography index.")
+    # return HttpResponse("Hello, world. You're at the cryptography index.")
     return render(request, 'index.html')
 
 
@@ -21,13 +21,13 @@ def cipher_form(request):
 
             new_text = caesar_cipher(key=key, text=text)
 
-
     form = CaesarCipherForm()
     return render(request, 'caesar.html', {'new_text': new_text, 'form': form})
 
 
 def caesar_cipher(key: int, text: str):
 
+    #try:
     new_text = ""
 
     for i in text:
@@ -41,4 +41,5 @@ def caesar_cipher(key: int, text: str):
             else:
                 new_letter = string.ascii_uppercase[(string.ascii_uppercase.index(i) + key) % 26]
                 new_text = new_text + new_letter
+    #except:
     return new_text
