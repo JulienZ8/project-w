@@ -26,7 +26,6 @@ class TestCaesarCipher(unittest.TestCase):
         expected_result = 'eqnvz'
         self.assertEqual(result, expected_result)
 
-
     def test_one_time_pad_mask_shorter(self):
         result = ca.one_time_pad(mask='xmckl', text='hellow')
         expected_result = 'eqnvzt'
