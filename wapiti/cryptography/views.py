@@ -27,7 +27,7 @@ def caesar_cipher_form(request):
 
 def one_time_pad_form(request):
 
-    new_text = ""
+    new_text = ''
     if request.method == 'POST':
         form = OneTimePadForm(request.POST)
         if form.is_valid():
@@ -35,6 +35,6 @@ def one_time_pad_form(request):
             text = form.cleaned_data['text_field']
 
             new_text = ca.one_time_pad(mask=mask, text=text)
-    print (new_text)
+
     form = OneTimePadForm()  # to check if necessary
     return render(request, 'pad.html', {'new_text': new_text, 'form': form})
