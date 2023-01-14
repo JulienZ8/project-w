@@ -1,22 +1,27 @@
 from django.test import TestCase
 import unittest
-from . import views
+from . import cipher_algorithms as ca
+
 
 # Create your tests here.
 class TestCaesarCipher(unittest.TestCase):
 
     def test_caesar_cipher_27(self):
-        result = views.caesar_cipher(key=27, text="abc")
+        result = ca.caesar_cipher(key=27, text="abc")
         expected_result = "bcd"
         self.assertEqual(result, expected_result)
 
-
     def test_caesar_cipher_53(self):
-        result = views.caesar_cipher(key=53, text="abc")
+        result = ca.caesar_cipher(key=53, text="abc")
         expected_result = "bcd"
         self.assertEqual(result, expected_result)
 
     def test_caesar_cipher_special_char(self):
-        result = views.caesar_cipher(key=1, text="Salut, Yann clâvien!")
+        result = ca.caesar_cipher(key=1, text="Salut, Yann clâvien!")
         expected_result = "Tbmvu, Zboo dmâwjfo!"
+        self.assertEqual(result, expected_result)
+
+    def test_one_time_pad(self):
+        result = ca.one_time_pad(mask='xmckl', text='hello')
+        expected_result = 'eqnvz'
         self.assertEqual(result, expected_result)
