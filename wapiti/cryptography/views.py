@@ -22,7 +22,7 @@ def caesar_cipher_form(request):
             new_text = ca.caesar_cipher(key=key, text=text)
 
     form = CaesarCipherForm()  # to check if necessary
-    return render(request, 'caesar.html', {'new_text': new_text, 'form': form})
+    return render(request, 'cipher/caesar.html', {'new_text': new_text, 'form': form})
 
 
 def one_time_pad_form(request):
@@ -37,4 +37,4 @@ def one_time_pad_form(request):
             new_text = ca.one_time_pad(mask=mask, text=text)
 
     form = OneTimePadForm()  # to check if necessary
-    return render(request, 'pad.html', {'new_text': new_text, 'form': form})
+    return render(request, 'cipher/pad.html', {'new_text': new_text, 'form': form})
