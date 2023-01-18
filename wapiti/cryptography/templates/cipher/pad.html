@@ -11,7 +11,8 @@
     <body style="padding: 20px;">
         {% crispy form form.helper %}
         <div>
-            Ciphered text : {{new_text}}
+            Ciphered text : {{new_text}}<br>
+            Mask used: {{mask}}
         </div>
     </body>
     {% endblock %}

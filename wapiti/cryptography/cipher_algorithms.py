@@ -3,22 +3,39 @@ import string
 
 def caesar_cipher(key: int, text: str) -> str:
     #try:
-    new_text = ""
+    cipher = ""
 
     for i in text:
 
         if not ((i.isalpha()) and i.isascii()):
-            new_text = new_text + i
+            cipher = cipher + i
         else:
             if i.islower():
                 new_letter = string.ascii_lowercase[(string.ascii_lowercase.index(i) + key) % 26]
-                new_text = new_text + new_letter
+                cipher = cipher + new_letter
             else:
                 new_letter = string.ascii_uppercase[(string.ascii_uppercase.index(i) + key) % 26]
-                new_text = new_text + new_letter
+                cipher = cipher + new_letter
     #except:
-    return new_text
+    return cipher
 
+def caesar_decipher(cipher: str, key: int) -> str:
+
+    decipher = ""
+
+    for i in cipher:
+
+        if not ((i.isalpha()) and i.isascii()):
+            decipher = decipher + i
+        else:
+            if i.islower():
+                new_letter = string.ascii_lowercase[(string.ascii_lowercase.index(i) - key) % 26]
+                decipher = decipher + new_letter
+            else:
+                new_letter = string.ascii_uppercase[(string.ascii_uppercase.index(i) - key) % 26]
+                decipher = decipher + new_letter
+    #except:
+    return decipher
 
 def one_time_pad(mask: str, text: str) -> str:
     # supression des espaces
@@ -46,3 +63,6 @@ def one_time_pad(mask: str, text: str) -> str:
         cipher_text = cipher_text + cipher_char
 
     return cipher_text
+
+print (caesar_cipher(3, "salut"))
+print (caesar_decipher("vdoxw", 3))
