@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 #from django.http import HttpResponse
-from .forms import CaesarCipherForm, CaesarDecipherForm, OneTimePadForm
+from .forms import CaesarCipherForm, CaesarDecipherForm, OneTimePadForm, OneTimePadDecipherForm
 from . import cipher_algorithms as ca
 
 
@@ -56,3 +56,18 @@ def one_time_pad_form(request):
 
     form = OneTimePadForm()  # to check if necessary
     return render(request, 'cipher/pad.html', {'new_text': new_text, 'form': form, 'mask': mask})
+
+def one_time_pad_decipher_form(request):
+
+    new_text = ''
+    mask = ''
+    if request.method == 'POST':
+        form = OneTimePadDecipherForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text_field']
+            mask = form.cleaned_data['mask_field']
+
+            new_text = ca.one_time_pad_decipher(mask=mask, text=text)
+
+    form = OneTimePadDecipherForm()  # to check if necessary
+    return render(request, 'cipher/pad_decipher.html', {'new_text': new_text, 'form': form, 'mask': mask})
