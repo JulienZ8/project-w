@@ -2,25 +2,29 @@ import string
 
 
 def caesar_cipher(key: int, text: str) -> str:
-    #try:
+
     cipher = ""
 
     for i in text:
-
+        # ignores all none alphabetic or ascii characters
         if not ((i.isalpha()) and i.isascii()):
             cipher = cipher + i
         else:
+            # if letter is lower case
             if i.islower():
+                # sum of alphabet index of text and alphabet index of key. if >26, back to 0
                 new_letter = string.ascii_lowercase[(string.ascii_lowercase.index(i) + key) % 26]
                 cipher = cipher + new_letter
+            # if letter is upper case
             else:
+                # sum of alphabet index of text and alphabet index of key. if >26, back to 0
                 new_letter = string.ascii_uppercase[(string.ascii_uppercase.index(i) + key) % 26]
                 cipher = cipher + new_letter
-    #except:
+
     return cipher
 
-def caesar_decipher(cipher: str, key: int) -> str:
 
+def caesar_decipher(cipher: str, key: int) -> str:
     decipher = ""
 
     for i in cipher:
@@ -34,8 +38,9 @@ def caesar_decipher(cipher: str, key: int) -> str:
             else:
                 new_letter = string.ascii_uppercase[(string.ascii_uppercase.index(i) - key) % 26]
                 decipher = decipher + new_letter
-    #except:
+    # except:
     return decipher
+
 
 def one_time_pad(mask: str, text: str) -> str:
     # supression des espaces
@@ -64,5 +69,20 @@ def one_time_pad(mask: str, text: str) -> str:
 
     return cipher_text
 
-print (caesar_cipher(3, "salut"))
-print (caesar_decipher("vdoxw", 3))
+
+def one_time_pad_decipher(text: str, mask: str):
+    text = text.replace(' ', '')
+    cipher = ''
+
+    for i in range(len(text)):
+        # alphabet index of text
+        text_alphabet_index = (string.ascii_lowercase.index(text[i]))
+        # index of text in mask
+        mask_index = i % len(mask)
+        # alphabet index of mask
+        mask_alphabet_index = (string.ascii_lowercase.index(mask[mask_index]))
+        # sum of alphabet index of text and alphabet index of mask. if >26, back to 0
+        cipher_index = (text_alphabet_index + mask_alphabet_index) % 26
+        cipher = cipher + string.ascii_lowercase[cipher_index]
+
+    return cipher
