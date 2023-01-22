@@ -21,6 +21,8 @@ class TestCaesarCipher(unittest.TestCase):
         expected_result = "Tbmvu, Zboo dmâwjfo!"
         self.assertEqual(result, expected_result)
 
+
+class TestOneTimePadCipher(unittest.TestCase):
     def test_one_time_pad_same_length(self):
         result = ca.one_time_pad(mask='xmckl', text='hello')
         expected_result = 'eqnvz'
