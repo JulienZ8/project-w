@@ -102,17 +102,17 @@ def rsa():
     # Choix d'un nombre premier e inférieur à phi -> exposant de chiffrement
     e = prime_number_generator(n=100, first_selected=2, max_value=phi)
 
-    # d = inverse modulaire de e -> exposant de déchiffrement
-    d = phi % e
+    # d = inverse modulaire de e pour la multiplication modulo phi -> exposant de déchiffrement
+    gcd, x, y = euclide_extended(e, phi)
+    d = x
 
-    public_key = f'{n}, {e}'
-
-    private_key = f'{n}, {d}'
+    public_key = f'{e}, {n}'
+    private_key = f'{d}, {n}'
 
     print(public_key)
     print(private_key)
 
-    return
+    return public_key, private_key
 
 
 def prime_number_generator(n: int, first_selected: int, max_value: int) -> int:
@@ -137,3 +137,21 @@ def prime_number_generator(n: int, first_selected: int, max_value: int) -> int:
     random_number = random.choice(prime_numbers)
 
     return random_number
+
+
+def euclide_extended(a, b):
+    # Base Case
+    if a == 0:
+        return b, 0, 1
+
+    gcd, x1, y1 = euclide_extended(b % a, a)
+
+    # Update x and y using results of recursive
+    # call
+    x = y1 - (b // a) * x1
+    y = x1
+
+    return gcd, x, y
+
+
+
