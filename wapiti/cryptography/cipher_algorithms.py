@@ -88,7 +88,7 @@ def one_time_pad_decipher(text: str, mask: str):
     return cipher
 
 
-def rsa(max_value: int):
+def rsa_key_generator(max_value: int):
     """
     Algorithme chiffrement RSA
     :param max_value: longueur de la liste dans laquelle chercher les nombres premiers
@@ -111,11 +111,8 @@ def rsa(max_value: int):
     gcd, x, y = euclide_extended(e, phi)
     d = x
 
-    public_key = f'{e}, {n}'
-    private_key = f'{d}, {n}'
-
-    print(public_key)
-    print(private_key)
+    public_key = (e, n)
+    private_key = (d, n)
 
     return public_key, private_key
 
@@ -149,6 +146,7 @@ def euclide_extended(a, b):
     Algorithme d'Euclide étendu pour trouver l'inverse modulaire
     :param a: exposant de chiffrement e
     :param b: phi
+    :return: x inverse of a modulob, y inverse of b modulo a
     """
     # Base Case
     if a == 0:
@@ -164,4 +162,28 @@ def euclide_extended(a, b):
     return gcd, x, y
 
 
+def rsa_cipher(max_value: int, clear_message: str):
+    encripted_message = ''
+    private_key = (-1, -1)
+    public_key = (-1, -1)
 
+    while private_key[0] < 2:  # TODO voir pourquoi négatif ou egale à 1
+        public_key, private_key = rsa_key_generator(max_value)
+
+    for char in clear_message:
+        encripted_char = f'{ord(char) ** public_key[0] % public_key[1]}-'
+        encripted_message = encripted_message + encripted_char
+
+    return public_key, private_key, encripted_message[0:-1]
+
+
+def rsa_decipher(private_key, encripted_message: str):
+    clear_message = ''
+
+    clear_message_splited = encripted_message.split('-')
+    for char in clear_message_splited:
+        clear_char_number = int(char) ** private_key[0] % private_key[1]
+        clear_char = chr(clear_char_number)
+        clear_message = clear_message + clear_char
+
+    return clear_message
