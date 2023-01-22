@@ -88,10 +88,15 @@ def one_time_pad_decipher(text: str, mask: str):
     return cipher
 
 
-def rsa():
+def rsa(max_value: int):
+    """
+    Algorithme chiffrement RSA
+    :param max_value: longueur de la liste dans laquelle chercher les nombres premiers
+    :return: clé public et clé privé
+    """
     # Choose p and q two prime numbers
-    p = prime_number_generator(n=100, first_selected=2, max_value=100)
-    q = prime_number_generator(n=100, first_selected=p, max_value=100)
+    p = prime_number_generator(n=max_value, first_selected=2, max_value=max_value)
+    q = prime_number_generator(n=max_value, first_selected=p, max_value=max_value)
 
     # n = pq -> module de chiffrement
     n = p * q
@@ -100,7 +105,7 @@ def rsa():
     phi = (p - 1) * (q - 1)
 
     # Choix d'un nombre premier e inférieur à phi -> exposant de chiffrement
-    e = prime_number_generator(n=100, first_selected=2, max_value=phi)
+    e = prime_number_generator(n=max_value, first_selected=2, max_value=phi)
 
     # d = inverse modulaire de e pour la multiplication modulo phi -> exposant de déchiffrement
     gcd, x, y = euclide_extended(e, phi)
@@ -140,6 +145,11 @@ def prime_number_generator(n: int, first_selected: int, max_value: int) -> int:
 
 
 def euclide_extended(a, b):
+    """
+    Algorithme d'Euclide étendu pour trouver l'inverse modulaire
+    :param a: exposant de chiffrement e
+    :param b: phi
+    """
     # Base Case
     if a == 0:
         return b, 0, 1
