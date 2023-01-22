@@ -17,15 +17,8 @@ def division(nominator: int, denominator: int) -> float:
         return result
 
 
-# result = division(12, 0)
-
-# print(result)
 
 
-
-
-
-rsa()
 
 
 
