@@ -24,7 +24,7 @@ def rsa_key_generator(max_value: int):
     :return: clé public et clé privé
     """
     # Choose p and q two prime numbers
-    p = prime_number_generator(n=max_value, first_selected=2, max_value=max_value)
+    p = prime_number_generator(n=max_value, first_selected=127, max_value=max_value)
     q = prime_number_generator(n=max_value, first_selected=p, max_value=max_value)
 
     # n = pq -> module de chiffrement
@@ -34,7 +34,7 @@ def rsa_key_generator(max_value: int):
     phi = (p - 1) * (q - 1)
 
     # Choix d'un nombre premier e inférieur à phi -> exposant de chiffrement
-    e = prime_number_generator(n=max_value, first_selected=2, max_value=phi)
+    e = prime_number_generator(n=max_value, first_selected=127, max_value=phi)
 
     # d = inverse modulaire de e pour la multiplication modulo phi -> exposant de déchiffrement
     gcd, x, y = euclide_extended(e, phi)
@@ -54,7 +54,7 @@ def prime_number_generator(n: int, first_selected: int, max_value: int) -> int:
     :return: nombre
     """
     prime_numbers = []
-    for num in range(2, n + 1):
+    for num in range(125, n + 1):
         if all(num % i != 0 for i in range(2, num)):
             prime_numbers.append(num)
 
@@ -108,7 +108,6 @@ def rsa_cipher(max_value: int, clear_message: str):
 
 def rsa_decipher(private_key, encripted_message: str):
     clear_message = ''
-
     clear_message_splited = encripted_message.split('-')
     for char in clear_message_splited:
         clear_char_number = int(char) ** private_key[0] % private_key[1]
@@ -118,11 +117,10 @@ def rsa_decipher(private_key, encripted_message: str):
     return clear_message
 
 
-public_key, private_key, message = rsa_cipher(100, 'hello ski')
-print(public_key)
-print(private_key)
-
-print(rsa_decipher(private_key, message))
-
-public = 4 ** 13 % 51
-print(public ** 5 % 51)
+decipher = 'hello ski'
+i = 0
+while decipher == 'hello ski':
+    public_key, private_key, message = rsa_cipher(1000, 'hello ski')
+    decipher = rsa_decipher(private_key=private_key, encripted_message=message)
+    i += 1
+    print(f'{i}-{decipher}')
