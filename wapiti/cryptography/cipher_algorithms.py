@@ -125,8 +125,8 @@ def prime_number_generator(n: int, first_selected: int, max_value: int) -> int:
     :return: nombre
     """
     prime_numbers = []
-    for num in range(2, n + 1):
-        if all(num % i != 0 for i in range(2, num)):
+    for num in range(100, n + 1):
+        if all(num % i != 0 for i in range(100, num)):
             prime_numbers.append(num)
 
     # on enlève p
