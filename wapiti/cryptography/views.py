@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 #from django.http import HttpResponse
@@ -11,14 +12,17 @@ def index(request):
 
 
 def caesar_cipher_form(request):
-
     new_text = ''
     key = ''
+
     if request.method == 'POST':
         form = CaesarCipherForm(request.POST)
         if form.is_valid():
             key = form.cleaned_data['key_field']
             text = form.cleaned_data['text_field']
+
+            print(key)
+            print(text)
 
             new_text = ca.caesar_cipher(key=key, text=text)
 
