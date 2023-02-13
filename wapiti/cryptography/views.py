@@ -14,19 +14,22 @@ def index(request):
 def caesar_cipher_form(request):
     new_text = ''
     key = ''
+    form = CaesarCipherForm()
 
     if request.method == 'POST':
         form = CaesarCipherForm(request.POST)
+
         if form.is_valid():
             key = form.cleaned_data['key_field']
             text = form.cleaned_data['text_field']
 
-            print(key)
-            print(text)
-
             new_text = ca.caesar_cipher(key=key, text=text)
+        else:
+            print(form.errors)
 
-    form = CaesarCipherForm()  # to check if necessary
+
+
+
     return render(request, 'cipher/caesar.html', {'new_text': new_text, 'form': form, 'key': key})
 
 
