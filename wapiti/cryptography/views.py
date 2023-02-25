@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-#from django.http import HttpResponse
-from .forms import CaesarCipherForm, CaesarDecipherForm, OneTimePadForm, OneTimePadDecipherForm
+# from django.http import HttpResponse
+from .forms import CaesarCipherForm, CaesarDecipherForm, OneTimePadForm, OneTimePadDecipherForm, RsaForm
 from . import cipher_algorithms as ca
 
 
@@ -11,7 +11,6 @@ def index(request):
 
 
 def caesar_cipher_form(request):
-
     new_text = ''
     key = ''
     if request.method == 'POST':
@@ -27,7 +26,6 @@ def caesar_cipher_form(request):
 
 
 def caesar_decipher_form(request):
-
     new_text = ''
     key = ''
     if request.method == 'POST':
@@ -43,7 +41,6 @@ def caesar_decipher_form(request):
 
 
 def one_time_pad_form(request):
-
     new_text = ''
     mask = ''
     if request.method == 'POST':
@@ -57,8 +54,8 @@ def one_time_pad_form(request):
     form = OneTimePadForm()  # to check if necessary
     return render(request, 'cipher/pad.html', {'new_text': new_text, 'form': form, 'mask': mask})
 
-def one_time_pad_decipher_form(request):
 
+def one_time_pad_decipher_form(request):
     new_text = ''
     mask = ''
     if request.method == 'POST':
@@ -71,3 +68,20 @@ def one_time_pad_decipher_form(request):
 
     form = OneTimePadDecipherForm()  # to check if necessary
     return render(request, 'cipher/pad_decipher.html', {'new_text': new_text, 'form': form, 'mask': mask})
+
+
+def rsa_cipher_form(request):
+    ciphered_message = ''
+    public_key = ''
+    private_key = ''
+
+    if request.method == 'POST':
+        form = RsaForm(request.POST)
+        if form.is_valid():
+            text_field = form.cleaned_data['text_field']
+
+            public_key, private_key, ciphered_message = ca.rsa_cipher(1000, text_field)
+
+    form = RsaForm()  # to check if necessary
+    return render(request, 'cipher/rsa_cipher.html', {'ciphered_message': ciphered_message, 'form': form,
+                                                      'public_key': public_key, 'private_key': private_key})
