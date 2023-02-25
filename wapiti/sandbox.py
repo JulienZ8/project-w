@@ -117,10 +117,9 @@ def rsa_decipher(private_key, encripted_message: str):
     return clear_message
 
 
-decipher = 'hello ski'
-i = 0
-while decipher == 'hello ski':
-    public_key, private_key, message = rsa_cipher(1000, 'hello ski')
-    decipher = rsa_decipher(private_key=private_key, encripted_message=message)
-    i += 1
-    print(f'{i}-{decipher}')
+
+
+public_key, private_key, message = rsa_cipher(1000, 'hello ski')
+print(type(private_key))
+decipher = rsa_decipher(private_key=private_key, encripted_message=message)
+

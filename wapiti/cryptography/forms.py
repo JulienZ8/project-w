@@ -73,3 +73,8 @@ class OneTimePadDecipherForm(forms.Form):
 
 class RsaForm(forms.Form):
     text_field = forms.CharField(label='Enter a text to cipher', max_length=100)
+
+
+class DecipherRsaForm(forms.Form):
+    text_field = forms.CharField(label='Enter a text to decipher', max_length=100)
+    private_key_field = forms.CharField(label='Enter the private key', max_length=100)

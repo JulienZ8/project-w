@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
 # from django.http import HttpResponse
-from .forms import CaesarCipherForm, CaesarDecipherForm, OneTimePadForm, OneTimePadDecipherForm, RsaForm
+from .forms import CaesarCipherForm, CaesarDecipherForm, OneTimePadForm, OneTimePadDecipherForm, RsaForm, \
+    DecipherRsaForm
 from . import cipher_algorithms as ca
 
 
@@ -85,3 +86,25 @@ def rsa_cipher_form(request):
     form = RsaForm()  # to check if necessary
     return render(request, 'cipher/rsa_cipher.html', {'ciphered_message': ciphered_message, 'form': form,
                                                       'public_key': public_key, 'private_key': private_key})
+
+
+def rsa_decipher_form(request):
+    deciphered_message = ''
+
+    if request.method == 'POST':
+        form = DecipherRsaForm(request.POST)
+        if form.is_valid():
+            ciphered_message = form.cleaned_data['text_field']
+            private_key = form.cleaned_data['private_key_field']
+
+            # cast private_key
+            for character in '()':
+                private_key = private_key.replace(character, '')
+            split = private_key.split(',')
+            cast_int = [int(i) for i in split]
+            private_key = tuple(cast_int)
+
+            deciphered_message = ca.rsa_decipher(private_key=private_key, encripted_message=ciphered_message)
+
+    form = DecipherRsaForm()
+    return render(request, 'cipher/rsa_decipher.html', {'deciphered_message': deciphered_message, 'form': form})
