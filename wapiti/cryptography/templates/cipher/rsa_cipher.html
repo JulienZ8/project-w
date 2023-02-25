@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+<html lang="en">
+    {% block body_block %}
+    <head>
+        <meta charset="UTF-8">
+
+        <title>RSA cipher algorithm</title>
+    </head>
+    <h1>RSA Cipher algorithm</h1>
+    <body style="padding: 20px;">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="text_field">Enter a text to cipher</label>
+                <input type="text" class="form-control" id="text_field" name="text_field" placeholder="Enter a text to cipher" value="{{ form.text_field.value }}" >
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div>
+            Ciphered text : {{ciphered_message}} <br>
+            Public key: {{public_key}} <br>
+            Private key: {{private_key}} <br>
+        </div>
+    </body>
+    {% endblock %}
+</html>
