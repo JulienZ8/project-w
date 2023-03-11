@@ -8,23 +8,47 @@
         <title>Caesar cipher algorithm</title>
     </head>
     <h1>Caesar Cipher algorithm</h1>
-    <body style="padding: 20px;">
-        <form method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="id_key_field">Enter a key</label>
-                <input type="number" class="form-control" id="id_key_field" name="key_field" aria-describedby="keyHelp" placeholder="Enter a key" value="{{ form.key_field.value }}">
-                <small id="keyHelper" class="form-text text-muted">Enter a key to cipher following text</small>
-            </div>
-            <div class="form-group">
-                <label for="text_field">Enter a text to cipher</label>
-                <input type="text" class="form-control" id="text_field" name="text_field" placeholder="Enter a text to cipher" value="{{ form.text_field.value }}" >
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        <div>
-            Ciphered text : {{new_text}}<br>
-            Key used: {{key}}
+    <body>
+        <div class="container-xl">
+        <div class="row">
+        <div class="col-sm-2">
+            <p>The Caesar Cipher is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions (the key) down the alphabet.</p>
+        </div>
+        <div class="col-sm-5">
+            <form method="post"> {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_key_field">Enter a key</label>
+                    <input type="number" class="form-control" id="id_key_field" name="key_field" aria-describedby="keyHelp" placeholder="Enter a key" value="{{ form.key_field.value }}">
+                    <small id="keyHelper" class="form-text text-muted">Enter a key to cipher following text</small>
+                </div>
+                <div class="form-group">
+                    <label for="id_text_field">Enter a text to cipher</label>
+                    <input type="text" class="form-control" id="id_text_field" name="text_field" placeholder="Enter a text to cipher" value="{{ form.text_field.value }}" >
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-sm-5">
+            <form>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label for="id_ciphered_result">Ciphered text :</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" id="id_ciphered_result" name="ciphered_result" value="{{new_text}}" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label for="id_ciphered_key">Key used:</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" id="id_ciphered_key" name="ciphered_key" value="{{key}}" readonly>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
         </div>
     </body>
     {% endblock %}
