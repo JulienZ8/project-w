@@ -11,11 +11,6 @@
     <body>
         <div class="container-xl">
         <div class="row">
-        <div class="col">
-             <h3>Column 1</h3>
-            <p>Lorem ipsum dolor..</p>
-        </div>
-        <div class="col">
             <form method="post"> {% csrf_token %}
                 <div class="form-group">
                     <label for="id_key_field">Enter a key</label>
@@ -23,15 +18,10 @@
                     <small id="keyHelper" class="form-text text-muted">Enter a key to cipher following text</small>
                 </div>
                 <div class="form-group">
-                    <label for="text_field">Enter a text to cipher</label>
-                    <input type="text" class="form-control" id="text_field" name="text_field" placeholder="Enter a text to cipher" value="{{ form.text_field.value }}" >
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
-        <div class="col">
-            Ciphered text : {{new_text}}<br>
-            Key used: {{key}}
         </div>
         </div>
         </div>
